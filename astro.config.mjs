@@ -3,6 +3,8 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://yongenaelf.github.io",
+  base: "developer-docs",
   integrations: [
     starlight({
       title: "Developer Docs",
