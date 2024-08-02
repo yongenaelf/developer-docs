@@ -7,6 +7,17 @@ description: GitHub Actions workflow
 
 ### DockerHub
 
+:::note
+
+Set the following [secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) in your repo:
+
+| Name            | Description                                                                          |
+| --------------- | ------------------------------------------------------------------------------------ |
+| DOCKER_USERNAME | your DockerHub username                                                              |
+| DOCKER_PASSWORD | your DockerHub [PAT](https://docs.docker.com/security/for-developers/access-tokens/) |
+
+:::
+
 ```yml title=.github/workflows/main.yml {30-31,37}
 name: Node.js CI
 
@@ -23,7 +34,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: "20.x"
           cache: "npm"
       - run: npm ci
       - run: npm run build
@@ -76,7 +87,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     permissions:
@@ -90,17 +100,17 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: "20.x"
           cache: "npm"
       - run: npm ci
       - run: npm run build
-      
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      
+
       - name: Log in to the Container registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -117,7 +127,7 @@ jobs:
             type=sha
             # set latest tag for default branch
             type=raw,value=latest,enable={{is_default_branch}}
-      
+
       - name: Build and push
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         id: push
@@ -127,7 +137,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
+
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
