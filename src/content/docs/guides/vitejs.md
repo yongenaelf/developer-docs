@@ -3,6 +3,12 @@ title: ViteJS
 description: ViteJS
 ---
 
+## Introduction
+
+Vite is a build tool that provides a fast and lean development experience for modern web projects. It offers lightning-fast startup and hot module replacement (HMR) and is designed to work seamlessly with modern JavaScript frameworks like React, Vue, and Svelte. Vite improves the development process by pre-bundling dependencies and using native ES modules in the browser.
+
+You can find the official documentation for Vite [here](https://vitejs.dev/guide/).
+
 ## Configuration
 
 ### Dockerfile

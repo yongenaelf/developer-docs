@@ -3,6 +3,12 @@ title: NextJS
 description: NextJS
 ---
 
+## Introduction
+
+Next.js is a popular React framework that enables functionality such as server-side rendering and generating static websites for React-based web applications. It's designed to make it easier to build fast, user-friendly web apps with features like hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more.
+
+You can find the official documentation for Next.js [here](https://nextjs.org/docs).
+
 ## Code changes
 
 If you are using environment variables, please ensure that you do the following:
