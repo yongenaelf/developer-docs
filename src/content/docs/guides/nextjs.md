@@ -60,26 +60,17 @@ module.exports = {
 
 ```dockerfile title=Dockerfile
 FROM cgr.dev/chainguard/node
-
 WORKDIR /app
 ENV NODE_ENV production
-
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
-
 COPY ./public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown node:node .next
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --chown=node:node ./.next/standalone ./
-COPY --chown=node:node ./.next/static ./.next/static
-
+COPY ./.next/standalone ./
+COPY ./.next/static ./.next/static
 ENV HOSTNAME=0.0.0.0
-
+USER node
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
 CMD [ "server.js" ]
@@ -107,57 +98,4 @@ Reference: https://github.com/vercel/next.js/tree/canary/examples/with-docker
 
 ### GitHub Actions Workflow
 
-```yml title=.github/workflows/main.yml
-name: Node.js CI
-
-on:
-  workflow_dispatch:
-  push:
-    branches: ["main"]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
-          tags: |
-            type=sha
-            # set latest tag for default branch
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-```
+See [this](./workflow.md) page.
