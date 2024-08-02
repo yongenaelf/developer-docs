@@ -9,7 +9,7 @@ export default defineConfig({
     starlight({
       title: "Developer Docs",
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/yongenaelf/developer-docs",
       },
       sidebar: [
         {
