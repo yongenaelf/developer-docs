@@ -18,7 +18,7 @@ Set the following [secrets](https://docs.github.com/en/actions/security-guides/u
 
 :::
 
-```yml title=.github/workflows/main.yml {30-31,37}
+```yml title=.github/workflows/main.yml
 name: Node.js CI
 
 on:
@@ -75,7 +75,7 @@ jobs:
 
 ### GitHub Container Registry
 
-```yml title=.github/workflows/main.yml {7-8,15-19,40-42,48,56,64-69}
+```yml title=.github/workflows/main.yml
 # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages
 name: Node.js CI
 
