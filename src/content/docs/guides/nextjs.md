@@ -98,4 +98,4 @@ Reference: https://github.com/vercel/next.js/tree/canary/examples/with-docker
 
 ### GitHub Actions Workflow
 
-See [this](./workflow.md) page.
+See [this](../workflow/) page.

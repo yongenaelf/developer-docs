@@ -59,4 +59,4 @@ server {
 
 ### GitHub Actions Workflow
 
-See [this](./workflow.md) page.
+See [this](../workflow/) page.
